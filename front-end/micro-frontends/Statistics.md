@@ -1,1 +1,3 @@
+#  Statistics 
 
+#### A página de estatísticas é uma ferramenta que fornece informações preciosas sobre diversos aspectos relacionados à produção animal, emissões de metano e CO2, comportamento do gado, consumo de rações e seu impacto ambiental ao longo do tempo. Essas informações são essenciais para os utilizadores compreenderem o panorama geral e tomarem decisões informadas e conscientes. Ao criar um micro frontend dedicado para essa funcionalidade, facilitamos a integração de informação com ferramentas de análise externas, permitindo análises mais avançadas e detalhadas sobre as estatísticas recolhidas. 
