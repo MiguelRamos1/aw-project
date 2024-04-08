@@ -1,1 +1,3 @@
+# ProductDetails
 
+####  A página de detalhes do produto desempenha um papel importante na experiência do utilizador, fornecendo informações detalhadas sobre os produtos scanneados. Esta página não apenas exibe dados essenciais, como descrição, preço e ingredientes, mas também permite interações significativas, como salvar produtos e fornecer feedback sobre a experiência com o produto. Ao dividir essa funcionalidade num micro frontend separado, podemos direcionar toda a atenção para a mesma, dedicando-lhe recursos de desenvolvimento e design para garantir uma interface intuitiva, atraente e informativa.
