@@ -1,0 +1,1029 @@
+---
+openapi: 3.0.1
+info:
+  title: QrMeat API
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/TOMASPITEIRA/QrMeat/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Statistics
+  description: Operations related to statistics
+- name: News
+  description: Operations related to news
+- name: Authentication
+  description: Operations related to user authentication
+- name: User Management
+  description: Operations related to user accounts and their definitions
+- name: Market
+  description: Operations related to markets and categories
+- name: Product
+  description: Operations related to products and feedback
+- name: ProductSaved
+  description: Operations related to saved products for users
+paths:
+  /statistics:
+    get:
+      tags:
+      - Statistics
+      summary: Get statistics
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+    put:
+      tags:
+      - Statistics
+      summary: Update statistics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+    post:
+      tags:
+      - Statistics
+      summary: Create new statistics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+    delete:
+      tags:
+      - Statistics
+      summary: Delete statistics
+      responses:
+        "200":
+          description: Successful deletion
+  /news:
+    get:
+      tags:
+      - News
+      summary: Get news
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsList'
+    post:
+      tags:
+      - News
+      summary: Create news
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/News'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /news/{news_id}:
+    get:
+      tags:
+      - News
+      summary: Get specific news by ID
+      parameters:
+      - name: news_id
+        in: path
+        description: ID of the news
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+    put:
+      tags:
+      - News
+      summary: Update news by ID
+      parameters:
+      - name: news_id
+        in: path
+        description: ID of the news
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/News'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - News
+      summary: Delete news by ID
+      parameters:
+      - name: news_id
+        in: path
+        description: ID of the news
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /login:
+    post:
+      tags:
+      - Authentication
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+        required: true
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: string
+                example: token
+  /register:
+    post:
+      tags:
+      - Authentication
+      summary: User registration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+        required: true
+      responses:
+        "201":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                type: string
+                example: token
+  /forgotpassword:
+    post:
+      tags:
+      - Authentication
+      summary: Forgot password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserForgotPass'
+        required: true
+      responses:
+        "200":
+          description: Password reset link sent
+          content:
+            application/json:
+              schema:
+                type: string
+                example: token
+  /users:
+    get:
+      tags:
+      - User Management
+      summary: Get all users
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+  /users/{user_id}:
+    get:
+      tags:
+      - User Management
+      summary: Get user by ID
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+      - User Management
+      summary: Update user by ID
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - User Management
+      summary: Delete user by ID
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /users/{user_id}/definitions:
+    get:
+      tags:
+      - User Management
+      summary: Get user definitions
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Definitions'
+    put:
+      tags:
+      - User Management
+      summary: Update user definitions
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Definitions'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+  /markets:
+    get:
+      tags:
+      - Market
+      summary: Get all markets
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketList'
+    post:
+      tags:
+      - Market
+      summary: Create new market
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Market'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /markets/{market_id}:
+    get:
+      tags:
+      - Market
+      summary: Get market by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Market'
+    put:
+      tags:
+      - Market
+      summary: Update market by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Market'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - Market
+      summary: Delete market by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /markets/{market_id}/categories:
+    get:
+      tags:
+      - Market
+      summary: Get categories by market ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    post:
+      tags:
+      - Market
+      summary: Create new category for a market
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /markets/{market_id}/categories/{category_id}:
+    get:
+      tags:
+      - Market
+      summary: Get category by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: category_id
+        in: path
+        description: ID of the category
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    put:
+      tags:
+      - Market
+      summary: Update category by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: category_id
+        in: path
+        description: ID of the category
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - Market
+      summary: Delete category by ID
+      parameters:
+      - name: market_id
+        in: path
+        description: ID of the market
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: category_id
+        in: path
+        description: ID of the category
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /products:
+    get:
+      tags:
+      - Product
+      summary: Get all products
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+    post:
+      tags:
+      - Product
+      summary: Create new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /products/{product_id}:
+    get:
+      tags:
+      - Product
+      summary: Get product by ID
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    put:
+      tags:
+      - Product
+      summary: Update product by ID
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - Product
+      summary: Delete product by ID
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /products/{product_id}/feedback:
+    post:
+      tags:
+      - Product
+      summary: Add feedback to a product
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /products/{product_id}/feedbacklist:
+    get:
+      tags:
+      - Product
+      summary: Get feedback list for a product
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+  /products/{product_id}/feedbacklist/{feedback_id}:
+    put:
+      tags:
+      - Product
+      summary: Update feedback by ID
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: feedback_id
+        in: path
+        description: ID of the feedback
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      responses:
+        "200":
+          description: Successful update
+    delete:
+      tags:
+      - Product
+      summary: Delete feedback by ID
+      parameters:
+      - name: product_id
+        in: path
+        description: ID of the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: feedback_id
+        in: path
+        description: ID of the feedback
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+  /users/{user_id}/productssaved:
+    get:
+      tags:
+      - ProductSaved
+      summary: Get saved products for a user
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSavedList'
+    post:
+      tags:
+      - ProductSaved
+      summary: Save a product for a user
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSaved'
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+  /users/{user_id}/productssaved/{productssaved_id}:
+    get:
+      tags:
+      - ProductSaved
+      summary: Get a saved product by ID for a user
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: productssaved_id
+        in: path
+        description: ID of the saved product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSaved'
+    delete:
+      tags:
+      - ProductSaved
+      summary: Delete a saved product by ID for a user
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: productssaved_id
+        in: path
+        description: ID of the saved product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful deletion
+components:
+  schemas:
+    Statistics:
+      required:
+      - id
+      type: object
+      properties:
+        statistics_id:
+          type: integer
+        description:
+          type: string
+    News:
+      required:
+      - description
+      - news_id
+      - title
+      type: object
+      properties:
+        news_id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        author:
+          type: string
+        date:
+          type: string
+          format: date
+        image:
+          type: string
+          format: url
+    User:
+      required:
+      - email
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        image:
+          type: string
+          format: url
+        definitions:
+          type: integer
+    Feedback:
+      required:
+      - feedback
+      - feedback_id
+      - user_id
+      type: object
+      properties:
+        feedback_id:
+          type: integer
+        user_id:
+          type: integer
+        feedback:
+          type: integer
+    Category:
+      required:
+      - category_id
+      - name
+      - products
+      type: object
+      properties:
+        category_id:
+          type: integer
+        name:
+          type: string
+        image:
+          type: string
+          format: url
+        products:
+          type: array
+          items:
+            type: integer
+    Market:
+      required:
+      - categories
+      - location
+      - market_id
+      - name
+      type: object
+      properties:
+        market_id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        categories:
+          type: array
+          items:
+            type: integer
+    Product:
+      required:
+      - feedbacklist
+      - image
+      - location
+      - name
+      - price
+      - product_id
+      type: object
+      properties:
+        product_id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        location:
+          type: integer
+        image:
+          type: string
+          format: url
+        producer:
+          type: string
+        origin:
+          type: string
+        alimentation:
+          type: string
+        age:
+          type: integer
+        feedbacklist:
+          type: array
+          items:
+            type: integer
+    Definitions:
+      required:
+      - definition_id
+      - user_id
+      type: object
+      properties:
+        definition_id:
+          type: integer
+        user_id:
+          type: integer
+        definitions:
+          type: string
+    UserLogin:
+      required:
+      - email
+      - password
+      - userlogin_id
+      type: object
+      properties:
+        userlogin_id:
+          type: integer
+        email:
+          type: string
+        password:
+          type: string
+    UserForgotPass:
+      required:
+      - email
+      - userforgotpass_id
+      type: object
+      properties:
+        userforgotpass_id:
+          type: integer
+        email:
+          type: string
+    ProductSaved:
+      required:
+      - products_saved
+      - productssaved_id
+      - user_id
+      type: object
+      properties:
+        productssaved_id:
+          type: integer
+        user_id:
+          type: integer
+        products_saved:
+          type: array
+          items:
+            type: integer
+    ProductSavedList:
+      type: object
+      properties:
+        products_saved:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSaved'
+    NewsList:
+      type: object
+      properties:
+        news_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/News'
+    MarketList:
+      type: object
+      properties:
+        market_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Market'
+    UserList:
+      type: object
+      properties:
+        user_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    ProductList:
+      type: object
+      properties:
+        product_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
